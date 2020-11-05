@@ -23,5 +23,5 @@ A interface deve possibilitar o carregamento de dois arquivos (o documento, e as
 * Mariana Salgueiro
 * Paulo Vitor Libório
 
-## Especifição
+## Especificação
 Código desenvolvido em javascript.
