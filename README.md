@@ -4,7 +4,7 @@
 Tarefa | Status | Progresso | Realizada | Entregue
 ------ | ------ | --------- | ------ | ----
 Controle 1 | :white_check_mark: | 100% | 03/11/20 | 05/11/20
-Controle 2 |  |  | 10/11/20 | 12/11/20
+Controle 2 |  | 50% | 10/11/20 | 12/11/20
 Controle 3 |  |  | 17/11/20 | 19/11/20
 Controle 4 |  |  | 24/11/20 | 26/11/20
 Entrega Final | | | 10/12/20 | 15/12/20
