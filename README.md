@@ -24,4 +24,10 @@ A interface deve possibilitar o carregamento de dois arquivos (o documento, e as
 * Paulo Vitor Libório
 
 ## Especificação
-Código desenvolvido em javascript.
+Código desenvolvido em JavaScript usando as seguintes bibliotecas/frameworks:
+* Node.js (https://nodejs.org)
+* React (https://reactjs.org)
+* Express.js (https://expressjs.com)
+* axios (github.com/axios/axios)
+* cors (github.com/expressjs/cors)
+* Youch (github.com/poppinss/youch)
