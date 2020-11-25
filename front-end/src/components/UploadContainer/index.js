@@ -7,19 +7,20 @@ import { Container, Description, SubDescription } from './styles'
 //https://www.youtube.com/watch?v=G5UZmvkLWSQ
 export default class UploadContainer extends Component {
 
-  renderDragMessage = (isDragActive) => {
+  renderDragMessage = (isDragActive, selectedFile) => {
     
-        if (!isDragActive) {
-          return (
-            <>
-              <Description>{this.props.description}</Description>
-              <SubDescription>{this.props.subDescription}</SubDescription>
-              <Button text={this.props.buttonText} backgroundColor={this.props.buttonColor}/>
-            </>
-          )
-        }
+    if (!isDragActive) {
+      return (
+        <>
+          <Description>{this.props.description}</Description>
+          <SubDescription>{this.props.subDescription}</SubDescription>
+          <Button text={this.props.buttonText} backgroundColor={this.props.buttonColor}/>
+          {!!selectedFile ? <SubDescription>Arquivo selecionado: {selectedFile.name}</SubDescription> : ''}
+        </>
+      )
+    }
 
-        return <Description>Solte o arquivo aqui.</Description>
+    return <Description>Solte o arquivo aqui.</Description>
 
   }
 
@@ -27,7 +28,7 @@ export default class UploadContainer extends Component {
     const { onUpload } = this.props
 
     return(
-      <Dropzone accept='text/plain' multiple={false} onDropAccepted={onUpload}>
+      <Dropzone accept='text/plain' onDropAccepted={onUpload}>
         {({getRootProps, getInputProps, isDragActive}) => (
           <Container
             background={this.props.background}
@@ -36,7 +37,7 @@ export default class UploadContainer extends Component {
             >
             <input {...getInputProps()}/>
             <img src='/uploadIcon.png' alt='Upload Icon' />
-            {this.renderDragMessage(isDragActive)}
+            {this.renderDragMessage(isDragActive, this.props.selectedFile)}
           </Container>
         )}
       </Dropzone>

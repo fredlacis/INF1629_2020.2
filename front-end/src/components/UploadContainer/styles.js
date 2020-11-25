@@ -8,19 +8,21 @@ const dragActive = css`
 
 export const Container = styled.div`
   width: 50%;
-  height: 40%;
+  min-width: 800px;
+  height: 100%;
   border-radius: 30px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 60px;
   background: ${props => props.background};
 
   ${props => props.isDragActive && dragActive}
 
   @media(max-width: 841px) {
+    min-width: 0;
     width: 100%;
   }
 `
