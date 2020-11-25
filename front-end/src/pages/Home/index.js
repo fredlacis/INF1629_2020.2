@@ -52,6 +52,11 @@ export default class Home extends Component {
           progress: progress,
         })
       }
+    }).then(response => {
+      console.log(response)
+      // Aqui vai entrar a lógica de exibir o resultado
+    }).catch(() => {
+      console.log('Error on upload files')
     })
   }
   
