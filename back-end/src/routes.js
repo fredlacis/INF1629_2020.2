@@ -1,9 +1,15 @@
 import {Router} from 'express';
 
+import multer from 'multer';
+
+import config from './multer';
+
 const routes = new Router();
 
-routes.post('/tf', async (req, res) => {
-    
+const multerMiddleware = multer(config);
+
+routes.post('/tf', multerMiddleware.fields([{name: 'documentFile'}, {name: 'stopWordsFile'}]), async (req, res) => {
+    return res.json(req);
 });
 
 export default routes;

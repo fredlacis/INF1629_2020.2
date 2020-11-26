@@ -5,6 +5,8 @@ import path from 'path';
 
 import routes from './routes';
 
+import 'express-async-errors';
+
 class App {
   constructor() {
     this.server = express();
