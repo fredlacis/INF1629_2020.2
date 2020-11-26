@@ -6,7 +6,7 @@ Tarefa | Status | Progresso | Realizada | Entregue
 Controle 1 | :white_check_mark: | 100% | 03/11/20 | 05/11/20
 Controle 2 | :white_check_mark: | 100% | 10/11/20 | 18/11/20
 Controle 3 | :white_check_mark: | 100% | 17/11/20 | 19/11/20
-Controle 4 | :soon: | 45% | 25/11/20 | 26/11/20
+Controle 4 | :soon: | 60% | 25/11/20 | 26/11/20
 Entrega Final | :soon:| :soon: | 10/12/20 | 15/12/20
 
 Cronograma no google sheets: https://docs.google.com/spreadsheets/d/1ezW78ffkOuMj-AfrsXSe6d09vCq72BNyqXnOk4yN5js/edit?usp=sharing
