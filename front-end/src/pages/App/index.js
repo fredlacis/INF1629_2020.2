@@ -62,7 +62,7 @@ export default class App extends Component {
         document: this.state.document,
         stopWords: this.state.stopWords,
         progress: this.state.progress,
-        result: response.dict,
+        result: response.data,
       })
     }).catch(() => {
       console.log('Error on upload files')

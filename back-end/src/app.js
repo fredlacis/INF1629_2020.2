@@ -20,7 +20,7 @@ class App {
     this.server.use(cors());
     this.server.use(
       '/tf',
-      express.static(path.resolve(__dirname, '..', 'tmp', 'upload'))
+      express.static(path.resolve(__dirname, '..', 'tmp'))
     );
   }
 
