@@ -39,6 +39,15 @@ export default class App extends Component {
     console.log(this.state)
   }
 
+  resetState = () => {
+    this.setState({
+      document: null,
+      stopWords: null,
+      progress: 0,
+      result: null,
+    })
+  }
+
   sendFiles = () => {
     const data = new FormData();
     data.append('documentFile', this.state.document, this.state.document.name)
@@ -74,6 +83,18 @@ export default class App extends Component {
       return (
         <Container>
           <ResultList resultDictionary={this.state.result} />
+          <Button 
+              text='Escolher outros arquivos'
+              isBig={true}
+              backgroundColor='#ddd'
+              handleClick={this.resetState}
+            />
+        </Container>
+      )
+    } else if(this.state.progress !== 0) {
+      return(
+        <Container>
+          <h1>Loading...</h1>
         </Container>
       )
     } else {
