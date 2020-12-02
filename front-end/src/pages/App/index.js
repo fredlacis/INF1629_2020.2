@@ -39,6 +39,15 @@ export default class App extends Component {
     console.log(this.state)
   }
 
+  resetState = () => {
+    this.setState({
+      document: null,
+      stopWords: null,
+      progress: 0,
+      result: null,
+    })
+  }
+
   sendFiles = () => {
     const data = new FormData();
     data.append('documentFile', this.state.document, this.state.document.name)
@@ -64,51 +73,81 @@ export default class App extends Component {
         progress: this.state.progress,
         result: response.data,
       })
-    }).catch(() => {
+    }).catch(error => {
+      this.setState({
+        document: null,
+        stopWords: null,
+        progress: 0,
+        result: 'error',
+      })
       console.log('Error on upload files')
+      console.log(error)
     })
   }
   
   render() {
-    if(this.state.result !== null) {
+    if (this.state.result === 'error') {
+      return (
+        <Container>
+          <h1>Tivemos um problema</h1>
+          <Button 
+                text='Tentar novamente'
+                isBig={true}
+                backgroundColor='#ddd'
+                handleClick={this.resetState}
+              />
+        </Container>
+      )
+    } else if (this.state.result !== null) {
       return (
         <Container>
           <ResultList resultDictionary={this.state.result} />
-        </Container>
-      )
-    } else {
-      return (
-        <>
-          <Container>
-            <Disclaimer>*Apenas documentos em português ou em inglês serão processados corretamente.</Disclaimer>
-            <UploadContainer
-              onUpload={this.handleDocumentUpload}
-              selectedFile={this.state.document}
-              description={<p>Arraste e solte seu <strong>documento (.txt)</strong></p>}
-              subDescription='ou'
-              buttonText='Selecione o arquivo'
-              background='#404D3E'
-              buttonColor='#BADDB4'
-            />
-            <UploadContainer 
-              onUpload={this.handleStopWordsUpload}
-              selectedFile={this.state.stopWords}
-              description={<p>Arraste e solte seu arquivo de <strong>stop-words (.txt)</strong></p>}
-              subDescription='ou'
-              buttonText='Selecione o arquivo'
-              background='#4D3E3E'
-              buttonColor='#DDB4B4'
-            />
-            <Button 
-              text='Calcular'
+          <Button 
+              text='Escolher outros arquivos'
               isBig={true}
               backgroundColor='#ddd'
-              disabled = {!this.state.document}
-              handleClick={this.sendFiles}
+              handleClick={this.resetState}
             />
-          </Container>
-        </>
+        </Container>
+      )
+    } else if (this.state.progress !== 0) {
+      return(
+        <Container>
+          <h1>Carregando...</h1>
+        </Container>
       )
     }
+    return (
+      <>
+        <Container>
+          <Disclaimer>*Apenas documentos em português ou em inglês serão processados corretamente.</Disclaimer>
+          <UploadContainer
+            onUpload={this.handleDocumentUpload}
+            selectedFile={this.state.document}
+            description={<p>Arraste e solte seu <strong>documento (.txt)</strong></p>}
+            subDescription='ou'
+            buttonText='Selecione o arquivo'
+            background='#404D3E'
+            buttonColor='#BADDB4'
+          />
+          <UploadContainer 
+            onUpload={this.handleStopWordsUpload}
+            selectedFile={this.state.stopWords}
+            description={<p>Arraste e solte seu arquivo de <strong>stop-words (.txt)</strong></p>}
+            subDescription='ou'
+            buttonText='Selecione o arquivo'
+            background='#4D3E3E'
+            buttonColor='#DDB4B4'
+          />
+          <Button 
+            text='Calcular'
+            isBig={true}
+            backgroundColor='#ddd'
+            disabled = {!this.state.document}
+            handleClick={this.sendFiles}
+          />
+        </Container>
+      </>
+    )
   }
 }

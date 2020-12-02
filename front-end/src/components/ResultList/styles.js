@@ -35,7 +35,8 @@ export const TableLine = styled.div`
   height: 65px;
   display: flex;
   flex-direction: row;
-  margin: 2px 0;
+  margin-top: 1px;
+  margin-bottom: 1px;
   margin-bottom: 0;
 `
 
@@ -47,5 +48,5 @@ export const TableCell = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #575757;
-  margin: 0 1px;
+  margin-right: 1px;
 `
