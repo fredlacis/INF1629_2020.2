@@ -4,11 +4,12 @@ import Dropzone from 'react-dropzone'
 import Button from '../Button'
 import { Container, Description, SubDescription } from './styles'
 
-//https://www.youtube.com/watch?v=G5UZmvkLWSQ
+// The component responsible for handling file selection via file-prompt or drag and drop.
+// Based on the following video: https://www.youtube.com/watch?v=G5UZmvkLWSQ
 export default class UploadContainer extends Component {
 
+  // Displays a message if a file is being dragged.
   renderDragMessage = (isDragActive, selectedFile) => {
-    
     if (!isDragActive) {
       return (
         <>
@@ -19,15 +20,16 @@ export default class UploadContainer extends Component {
         </>
       )
     }
-
     return <Description>Solte o arquivo aqui.</Description>
-
   }
 
+  // This is where everything shown by this component is rendered.
   render() {
     const { onUpload } = this.props
 
     return(
+      // Dropzone is a component from the React-Dropzone library witch makes handling drag and drop
+      // files a lot easier.
       <Dropzone accept='text/plain' onDropAccepted={onUpload}>
         {({getRootProps, getInputProps, isDragActive}) => (
           <Container

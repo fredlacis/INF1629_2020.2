@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+// The styles used by the ResultList component.
+// Using the styled-components library to be able to give representative names for every style.
+
 export const ResultContainer = styled.div`
   width: 50%;
   margin-top: 25px;
@@ -49,4 +52,5 @@ export const TableCell = styled.div`
   justify-content: center;
   background-color: #575757;
   margin-right: 1px;
+  margin-bottom: 0%;
 `

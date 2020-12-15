@@ -1,5 +1,8 @@
 import styled, { css } from "styled-components";
 
+// The styles used by the UploadContainer component.
+// Using the styled-components library to be able to give representative names for every style.
+
 const dragActive = css`
   border-style: solid;
   border-width: 1px;

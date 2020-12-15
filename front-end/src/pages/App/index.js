@@ -8,16 +8,25 @@ import ResultList from '../../components/ResultList'
 
 import { Container, Disclaimer } from './styles'
 
+// This is the main component of the app itself. The app class is where all the logic of uploading
+// the archives, making the request to the back-end and receiving its response is made.
 export default class App extends Component {
 
+  // All the necessary state variables to dynamically change what is shown to the user
   state = {
+    // The reference to the main document for Term Frequency
     document: null,
+    // The reference to the stop words document for Term Frequency
     stopWords: null,
+    // The percentage of the upload of both files
     progress: 0,
+    // The result of the request made to the backend
     result: null,
   }
 
-  handleDocumentUpload = files => {
+  // The method responsible for receiving the reference to the document file and put it in the
+  // correct state variable.
+  handleDocumentSelection = files => {
     const selectedFile = files[0]
     this.setState({
       document: selectedFile,
@@ -28,7 +37,9 @@ export default class App extends Component {
     console.log(this.state)
   }
 
-  handleStopWordsUpload = files => {
+  // The method responsible for receiving the reference to the stop words file and put it in the
+  // correct state variable.
+  handleStopWordsSelection = files => {
     const selectedFile = files[0]
     this.setState({
       document: this.state.document,
@@ -39,6 +50,7 @@ export default class App extends Component {
     console.log(this.state)
   }
 
+  // Resets the app to its initial state.
   resetState = () => {
     this.setState({
       document: null,
@@ -48,6 +60,8 @@ export default class App extends Component {
     })
   }
 
+  // This is the method responsible for uploading the files, sending it to the back-end, catch any
+  // existing error, and receive the results.
   sendFiles = () => {
     const data = new FormData();
     data.append('documentFile', this.state.document, this.state.document.name)
@@ -55,7 +69,9 @@ export default class App extends Component {
       data.append('stopWordsFile', this.state.stopWords, this.state.stopWords.name)
     }
     console.log(data)
+    // Makes a request to the back-end with the /tf address.
     api.post('/tf', data, {
+      // Called everytime there is a progress in the upload.
       onUploadProgress: e => {
         const progress = parseInt(Math.round((e.loaded * 100) / e.total))
         this.setState({
@@ -66,7 +82,8 @@ export default class App extends Component {
       }
     }).then(response => {
       console.log(response)
-      // Aqui vai entrar a lógica de exibir o resultado
+      // When a response is received from the backend, we set its state so it can be shown to the
+      // user.
       this.setState({
         document: this.state.document,
         stopWords: this.state.stopWords,
@@ -74,6 +91,8 @@ export default class App extends Component {
         result: response.data,
       })
     }).catch(error => {
+      // When an error is received from the backend, we set its state so it can be shown to the
+      // user, and give the option to try again.
       this.setState({
         document: null,
         stopWords: null,
@@ -85,7 +104,9 @@ export default class App extends Component {
     })
   }
   
+  // This is where everything shown in the screen is rendered.
   render() {
+    // If there is an error
     if (this.state.result === 'error') {
       return (
         <Container>
@@ -98,7 +119,9 @@ export default class App extends Component {
               />
         </Container>
       )
-    } else if (this.state.result !== null) {
+    }
+    // If there is a result
+    else if (this.state.result !== null) {
       return (
         <Container>
           <ResultList resultDictionary={this.state.result} />
@@ -110,19 +133,22 @@ export default class App extends Component {
             />
         </Container>
       )
-    } else if (this.state.progress !== 0) {
+    }
+    // If the app is waiting for response
+    else if (this.state.progress !== 0) {
       return(
         <Container>
           <h1>Carregando...</h1>
         </Container>
       )
     }
+    // If the app is in its initial state
     return (
       <>
         <Container>
           <Disclaimer>*Apenas documentos em português ou em inglês serão processados corretamente.</Disclaimer>
           <UploadContainer
-            onUpload={this.handleDocumentUpload}
+            onUpload={this.handleDocumentSelection}
             selectedFile={this.state.document}
             description={<p>Arraste e solte seu <strong>documento (.txt)</strong></p>}
             subDescription='ou'
@@ -131,7 +157,7 @@ export default class App extends Component {
             buttonColor='#BADDB4'
           />
           <UploadContainer 
-            onUpload={this.handleStopWordsUpload}
+            onUpload={this.handleStopWordsSelection}
             selectedFile={this.state.stopWords}
             description={<p>Arraste e solte seu arquivo de <strong>stop-words (.txt)</strong></p>}
             subDescription='ou'

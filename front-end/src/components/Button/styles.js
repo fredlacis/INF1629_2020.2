@@ -1,5 +1,8 @@
 import styled, { css } from "styled-components";
 
+// The styles used by the Button component.
+// Using the styled-components library to be able to give representative names for every style.
+
 export const Container = styled.button`
   border: none;
   background: ${props => props.background};
