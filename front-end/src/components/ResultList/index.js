@@ -2,6 +2,7 @@ import React from 'react'
 
 import { ResultContainer, TableCell, TableLine, ListContainer } from './styles'
 
+// The component responsible for displaying the result of the Term Frequency operation.
 export default function ResultList({resultDictionary}) {
   return (
     <ResultContainer>
