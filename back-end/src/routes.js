@@ -29,7 +29,10 @@ routes.post('/tf', multerMiddleware.fields([{name: 'documentFile'}, {name: 'stop
             response[s] = 1;
         }
     });
-    return res.json(response);
+    const sortable = Object.fromEntries(
+        Object.entries(response).sort(([,a],[,b]) => b-a)
+    );
+    return res.json(sortable);
 });
 
 export default routes;
